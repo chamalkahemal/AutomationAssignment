@@ -28,7 +28,7 @@ public class BookBuyingProcessTest {
     }
 
     @Test
-    public void testBuy() {
+    public void testBuy() throws InterruptedException{
 
         String amount = "$0.00";
         int setQty = 2;
@@ -92,7 +92,7 @@ public class BookBuyingProcessTest {
 
         // 13. Verify whether the cart details are correct (Item name, Quantity and Total Price)
         String productNameInCart = driver.findElement(By.xpath("//span[@class = 'a-truncate sc-grid-item-product-title a-size-base-plus']//span[@class = 'a-truncate-cut']")).getText();
-        int quantityInCart = Integer.parseInt(driver.findElement(By.xpath("//span[@class = 'a-dropdown-prompt']")).getText().trim());
+        float quantityInCart = Integer.parseInt(driver.findElement(By.xpath("//span[@class = 'a-dropdown-prompt']")).getText().trim());
         String totalPriceInCart = driver.findElement(By.xpath("//div[@data-name = 'Subtotals']/span[@id = 'sc-subtotal-amount-activecart']")).getText();
 
         // 13.1 Verify the Product Name displayed in the cart
@@ -102,13 +102,14 @@ public class BookBuyingProcessTest {
         Assert.assertEquals(quantityInCart,setQty);
 
         // From unitPrice extract only the digits
-        int itemPrice = Integer.parseInt(unitPrice.replaceAll("[^0-9]",""));
+        float itemPrice = Integer.parseInt(unitPrice.replaceAll("[^0-9]",""));
+        System.out.println(itemPrice);
 
         //From totalPriceInCart extract only the digits
         int totalItemPrice = Integer.parseInt(totalPriceInCart.replaceAll("[^0-9]",""));
 
         //Calculate the Total price from unit price
-         int multipliedTotalPrice = itemPrice*2;
+         float multipliedTotalPrice = itemPrice*2;
 
          // 13.3 Verify the Total Price
         Assert.assertEquals(totalItemPrice,multipliedTotalPrice);
