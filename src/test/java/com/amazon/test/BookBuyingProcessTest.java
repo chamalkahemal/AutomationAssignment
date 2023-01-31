@@ -11,10 +11,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import java.util.concurrent.TimeUnit;
 
 
-public class BookBuyProcess {
+public class BookBuyingProcessTest {
     WebDriver driver;
 
     @BeforeMethod
@@ -29,7 +28,7 @@ public class BookBuyProcess {
     }
 
     @Test
-    public void testBuy() throws InterruptedException {
+    public void testBuy() {
 
         String amount = "$0.00";
         int setQty = 2;
