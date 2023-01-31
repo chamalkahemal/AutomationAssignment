@@ -28,7 +28,7 @@ public class BookBuyingProcessTest {
     }
 
     @Test
-    public void testBuy() throws InterruptedException{
+    public void testBuy(){
 
         String amount = "$0.00";
         int setQty = 2;
@@ -58,9 +58,10 @@ public class BookBuyingProcessTest {
         // 7. Click the second item from the Product List page and navigate to the Product Detail page
         driver.findElement(By.xpath("//div[@cel_widget_id='MAIN-SEARCH_RESULTS-2']//h2//a")).click();
         //Thread.sleep(4000);
-        waitUntilNextElementAppears(By.xpath("//li[@class = 'swatchElement unselected resizedSwatchElement']//span[@class = 'a-button-inner']"),10);
+        //waitUntilNextElementAppears(By.xpath("//li[@class = 'swatchElement unselected resizedSwatchElement']//span[@class = 'a-button-inner']"),10);
 
         //Click the Paperback type
+        driver.findElement(By.xpath("//li[@class = 'swatchElement unselected resizedSwatchElement']//span[@class = 'a-button-inner']")).click();
         driver.findElement(By.xpath("//li[@class = 'swatchElement unselected resizedSwatchElement']//span[@class = 'a-button-inner']")).click();
         waitUntilNextElementAppears(By.xpath("//div[@id = 'corePrice_feature_div']//span[@class = 'a-offscreen'] | //span[@id = 'price']"),10);
 
@@ -102,8 +103,10 @@ public class BookBuyingProcessTest {
         Assert.assertEquals(quantityInCart,setQty);
 
         // From unitPrice extract only the digits
-        float itemPrice = Integer.parseInt(unitPrice.replaceAll("[^0-9]",""));
+        int itemPrice = Integer.parseInt(unitPrice.replaceAll("[^0-9]",""));
         System.out.println(itemPrice);
+
+        String itemp = unitPrice.replaceAll("[^0-9]","");
 
         //From totalPriceInCart extract only the digits
         int totalItemPrice = Integer.parseInt(totalPriceInCart.replaceAll("[^0-9]",""));
